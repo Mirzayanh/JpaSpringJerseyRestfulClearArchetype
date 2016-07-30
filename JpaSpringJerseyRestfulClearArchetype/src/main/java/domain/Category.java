@@ -18,7 +18,11 @@ public class Category implements  java.io.Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Byte id;
+
+    @Column(name = "name", nullable = false, length = 45)
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     private Set<Product> products = new HashSet<Product>(0);
 
     public Category() {
@@ -42,7 +46,6 @@ public class Category implements  java.io.Serializable{
         this.id = id;
     }
 
-    @Column(name = "name", nullable = false, length = 45)
     public String getName() {
         return this.name;
     }
@@ -51,7 +54,6 @@ public class Category implements  java.io.Serializable{
         this.name = name;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     public Set<Product> getProducts() {
         return this.products;
     }

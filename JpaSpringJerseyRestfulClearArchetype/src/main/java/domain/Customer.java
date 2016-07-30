@@ -10,20 +10,37 @@ import java.util.Set;
 @Entity
 @Table(name = "customer", catalog = "bib")
 public class Customer  implements java.io.Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
+
+    @Column(name = "name", nullable = false, length = 45)
     private String name;
+
+    @Column(name = "email", unique = true, nullable = false, length = 45)
     private String email;
+
+    @Column(name = "phone", nullable = false, length = 45)
     private String phone;
+
+    @Column(name = "address", nullable = false, length = 45)
     private String address;
+
+    @Column(name = "city_region", nullable = false, length = 2)
     private String cityRegion;
+
+    @Column(name = "cc_number", nullable = false, length = 19)
     private String ccNumber;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private Set<CustomerOrder> customerOrders = new HashSet<CustomerOrder>(0);
 
     public Customer() {
     }
 
-    public Customer(String name, String email, String phone, String address,
-                    String cityRegion, String ccNumber) {
+    public Customer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -43,9 +60,7 @@ public class Customer  implements java.io.Serializable{
         this.customerOrders = customerOrders;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+
     public Integer getId() {
         return this.id;
     }
@@ -54,7 +69,7 @@ public class Customer  implements java.io.Serializable{
         this.id = id;
     }
 
-    @Column(name = "name", nullable = false, length = 45)
+
     public String getName() {
         return this.name;
     }
@@ -63,7 +78,7 @@ public class Customer  implements java.io.Serializable{
         this.name = name;
     }
 
-    @Column(name = "email", unique = true, nullable = false, length = 45)
+
     public String getEmail() {
         return this.email;
     }
@@ -72,7 +87,7 @@ public class Customer  implements java.io.Serializable{
         this.email = email;
     }
 
-    @Column(name = "phone", nullable = false, length = 45)
+
     public String getPhone() {
         return this.phone;
     }
@@ -81,7 +96,7 @@ public class Customer  implements java.io.Serializable{
         this.phone = phone;
     }
 
-    @Column(name = "address", nullable = false, length = 45)
+
     public String getAddress() {
         return this.address;
     }
@@ -90,7 +105,7 @@ public class Customer  implements java.io.Serializable{
         this.address = address;
     }
 
-    @Column(name = "city_region", nullable = false, length = 2)
+
     public String getCityRegion() {
         return this.cityRegion;
     }
@@ -99,7 +114,7 @@ public class Customer  implements java.io.Serializable{
         this.cityRegion = cityRegion;
     }
 
-    @Column(name = "cc_number", nullable = false, length = 19)
+
     public String getCcNumber() {
         return this.ccNumber;
     }
@@ -108,7 +123,7 @@ public class Customer  implements java.io.Serializable{
         this.ccNumber = ccNumber;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+
     public Set<CustomerOrder> getCustomerOrders() {
         return this.customerOrders;
     }
